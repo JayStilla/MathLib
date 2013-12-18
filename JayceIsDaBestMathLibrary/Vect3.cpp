@@ -1,0 +1,52 @@
+#include "Vect3.h"
+#include "Matrix3.h"
+////////////////////////////////////////////////////////////////////////VECTOR 3 FUNCTIONS
+float Vector3::Magnitude()
+{
+	return sqrt ((x*x) + (y*y) + (z*z));
+}
+
+Vector3 Vector3::GetNormal(Vector3 &v)
+{
+	float mag = sqrt ((v.x*v.x) + (v.y*v.y) + (v.z*v.z)); 
+	Vector3 result = {v.x/mag, v.y/mag, v.z/mag};
+	return result; 
+}
+
+Vector3 Vector3::Normalise(Vector3 &v)
+{
+	float mag = sqrt ((x*x) + (y*y) + (z*z)); 
+	Vector3 normVector = {v.x/mag, v.y/mag, v.z/mag};
+	return normVector;
+}
+
+float Vector3::DotProduct(Vector3 &b)
+{
+	return (x*b.x) + (y*b.y) + (z*b.z);
+}
+
+Vector3 Vector3::CrossProduct(Vector3 &a, Vector3 &c)
+{
+	Vector3 cpV3 = {this->y*c.z - this->z*c.y, this->z*c.x - this->x*c.z, this->x*c.y - this->y*c.x};
+	return cpV3;
+}
+
+float Vector3::EulerAngle(Vector3 &a, Vector3 &b)
+{
+	float scalar = Vector3::DotProduct(b); 
+	float aMag = Vector3::Magnitude(); 
+	float bMag = Vector3::Magnitude(); 
+	float timeMag = aMag * bMag; 
+
+	float angle = acosf(scalar/timeMag); 
+	return angle; 
+}
+
+Vector3 Vector3::m_TransformVector3(Matrix3 &w)
+{
+	Vector3 b;
+	b.x = x * w.a_fMatricesMatrix2D[0][0] + y * w.a_fMatricesMatrix2D[1][0] + z * w.a_fMatricesMatrix2D[2][0]; 
+	b.y = x * w.a_fMatricesMatrix2D[0][1] + y * w.a_fMatricesMatrix2D[1][1] + z * w.a_fMatricesMatrix2D[2][1];
+	b.z = x * w.a_fMatricesMatrix2D[0][2] + y * w.a_fMatricesMatrix2D[1][2] + z * w.a_fMatricesMatrix2D[2][2]; 
+	return b; 
+}
