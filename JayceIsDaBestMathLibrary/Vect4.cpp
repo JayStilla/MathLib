@@ -63,3 +63,12 @@ Vector4 Vector4::m_TransformPoint(Matrix4 &c)
 	}
 	return b; 
 }
+Vector4 Vector4::Scale(Matrix4 &mat4)
+{
+	Vector4 temp;
+	temp.x = x * mat4.a_fMatricesMatrix3D[0][0] + y * 0 + z * 0 + w * 0;
+	temp.y = x * 0 + y * mat4.a_fMatricesMatrix3D[1][1] + z * 0  + w * 0;
+	temp.z = x * 0 + y * 0 + z * mat4.a_fMatricesMatrix3D[2][2] + w * 0;
+	temp.w = x * 0 + y * 0 + z * 0 + w * mat4.a_fMatricesMatrix3D[3][3];
+	return temp;
+}

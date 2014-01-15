@@ -43,7 +43,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="JayceDaBestMathLibrary.lib">
+    <Library Include="JayceIsDaBestMathLibrary.lib">
       <Filter>Resource Files</Filter>
     </Library>
   </ItemGroup>

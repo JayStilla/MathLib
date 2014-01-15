@@ -1,4 +1,5 @@
 #include "Matrix4.h"
+#include "MiscMath.h"
 #include "math.h"
 
 //BUILDING X ROTATION////////////////////////////
@@ -114,3 +115,41 @@ Matrix4 Matrix4::m_TranslationXYZ(float x, float y, float z)
 	TranslationXYZ.a_fMatricesMatrix3D[3][3] = 1; 
 	return TranslationXYZ;  
 }
+
+Matrix4 Matrix4::m_OrthoProjection(float l, float r, float b, float n, float f, float t)
+{
+	Matrix4 mat; 
+	mat.a_fMatricesMatrix3D[0][0] = 2 * n / (r - 1); 
+	mat.a_fMatricesMatrix3D[0][1] = 0; 
+	mat.a_fMatricesMatrix3D[0][2] = 0;
+    mat.a_fMatricesMatrix3D[0][3] = 0;
+ 
+    mat.a_fMatricesMatrix3D[1][0] = 0;
+    mat.a_fMatricesMatrix3D[1][1] = 2 * n / (t - b);
+    mat.a_fMatricesMatrix3D[1][2] = 0;
+    mat.a_fMatricesMatrix3D[1][3] = 0;
+ 
+    mat.a_fMatricesMatrix3D[2][0] = (r + l) / (r - l);
+    mat.a_fMatricesMatrix3D[2][1] = (t + b) / (t - b);
+    mat.a_fMatricesMatrix3D[2][2] = -(f + n) / (f - n);
+    mat.a_fMatricesMatrix3D[2][3] = -1;
+ 
+    mat.a_fMatricesMatrix3D[3][0] = 0;
+    mat.a_fMatricesMatrix3D[3][1] = 0;
+    mat.a_fMatricesMatrix3D[3][2] = -2 * f * n / (f - n);
+    mat.a_fMatricesMatrix3D[3][3] = 0;
+
+	return mat; 
+}
+
+void Matrix4::m_OrthoVariables(float angle, float imageAspectRatio, float n, float f)
+{
+	Matrix4 mat;
+	CommonMath RadCon;
+	float scale = tan(RadCon.m_RadianConvert(angle * 0.5)) *n; 
+	float r = imageAspectRatio * scale, l = -r; 
+	float t = scale, b = -t; 
+	Matrix4::m_OrthoProjection(l, r, b, n, f, t); 
+}
+
+

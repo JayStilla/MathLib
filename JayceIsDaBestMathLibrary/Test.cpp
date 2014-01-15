@@ -1,5 +1,4 @@
 #include <iostream>
-//#include <Windows.h>
 #include "MiscMath.h"
 #include "Matrix3.h"
 #include "Matrix4.h"
@@ -53,6 +52,11 @@ int main()
 	cout << TranslationXYZ; 
 	cout << endl; 
 
+	Matrix4 mat; 
+	mat = Mat4.m_OrthoProjection(2,2,2,2,2,2);
+	cout << mat; 
+	cout << endl; 
+
 	cout << "---------------------------COMMON MATH--------------------------------" << endl; 
 
 	cout << ComMath.Pow2(2, 2)<< endl; 
@@ -88,6 +92,12 @@ int main()
 	Vect3.x =2; Vect3.y = 2; Vect3.z = 2; 
 	cout << Vect3.m_TransformVector3(Mat3)<<endl; 
 
+	Matrix3 tempM; 
+	tempM = Mat3; 
+	Vect3.x = 2; Vect3.y = 2; Vect3.z = 2; 
+	cout << Vect3.Scale(Mat3); 
+	cout << endl; 
+
 	cout << "---------------------------VECTOR 4--------------------------------" << endl; 
 	Vect4.x = 2; Vect4.y =2; Vect4.z =2; Vect4.w = 2;  
 	cout << Vect4.m_Magnitude()<<endl;
@@ -112,6 +122,13 @@ int main()
 	Transform3 = Mat4; 
 	Vect4.x = 2; Vect4.y =2; Vect4.z =2; Vect4.w = 2;
 	cout << Vect4.m_TransformVector4(Vect4, Mat4); 
+	cout << endl; 
+
+	Matrix4 mat4; 
+	mat4 = Mat4; 
+	Vect4.x = 2; Vect4.y = 2; Vect4.z = 2; Vect4.w = 2; 
+	cout << Vect4.Scale(Mat4); 
+	cout << endl; 
 
 	cout << "---------------------------VECTOR 2--------------------------------" << endl; 
 	Vectors::Point2D Point; 

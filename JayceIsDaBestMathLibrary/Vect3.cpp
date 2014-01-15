@@ -1,5 +1,5 @@
 #include "Vect3.h"
-#include "Matrix3.h"
+
 ////////////////////////////////////////////////////////////////////////VECTOR 3 FUNCTIONS
 float Vector3::Magnitude()
 {
@@ -49,4 +49,13 @@ Vector3 Vector3::m_TransformVector3(Matrix3 &w)
 	b.y = x * w.a_fMatricesMatrix2D[0][1] + y * w.a_fMatricesMatrix2D[1][1] + z * w.a_fMatricesMatrix2D[2][1];
 	b.z = x * w.a_fMatricesMatrix2D[0][2] + y * w.a_fMatricesMatrix2D[1][2] + z * w.a_fMatricesMatrix2D[2][2]; 
 	return b; 
+}
+
+Vector3 Vector3::Scale(Matrix3 &tempM)
+{
+	Vector3 temp;
+	temp.x =  x * tempM.a_fMatricesMatrix2D[0][0] +  y * 0 +  z * 0;
+	temp.y =  x * 0 +  y * tempM.a_fMatricesMatrix2D[1][1] +	 z * 0;
+	temp.z =  x * 0 +  y * 0 +  z * tempM.a_fMatricesMatrix2D[2][2];
+	return temp;
 }

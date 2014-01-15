@@ -5,7 +5,13 @@
 #include "math.h"
 #include "Matrix3.h"
 
-class Vector3
+#ifdef DLL
+        #define DLLEXPORT __declspec(dllexport)
+#else
+        #define DLLEXPORT __declspec(dllimport)
+#endif
+
+class DLLEXPORT Vector3
 {
 public:
 	float x; 
@@ -18,8 +24,9 @@ public:
 	float DotProduct(Vector3 &b); 
 	float EulerAngle(Vector3 &a, Vector3 &b); 
 	Vector3 CrossProduct(Vector3 &a, Vector3 &c);
-	Vector3 m_Lerp(Vector3 &a, Vector3 &b, float tx);
 	Vector3 m_TransformVector3(Matrix3 &w);
+	Vector3 Scale(Matrix3 &TempM);
+
 	Vector3 operator-(Vector3 &b)
 	{
 		Vector3 c; 
@@ -51,6 +58,13 @@ public:
 		c.y = y + b.y; 
 		c.z = z + b.z; 
 		return c; 
+	}
+
+	inline friend ostream& operator<< (ostream &os, const Vector3 &Vect3)
+	{
+		os << Vect3.x << " " << Vect3.y << " " << Vect3.z << " "; 
+
+		return os; 
 	}
 
 

@@ -3,7 +3,11 @@
 
 #define _USE_MATH_DEFINES
 #include "math.h"
-#include "Matrix4.h"
+#include <iostream>
+
+using namespace std;
+
+class Matrix4;
 
 #ifdef DLL
         #define DLLEXPORT __declspec(dllexport)
@@ -26,16 +30,8 @@ public:
 	Vector4 m_RGBconverter(int hexValue);
 	Vector4 m_TransformPoint(Matrix4 &c);
 	Vector4 m_TransformVector4(Vector4 &a, Matrix4 &w);
+	Vector4 Scale(Matrix4 &mat4);
 	
-	/*
-	Vector4 operator * (Matrix4 &w)
-	{
-		Vector4 c; 
-		c.x = x * w.a_fMatricesMatrix3D[4][4];
-		c.y = y * w.a_fMatricesMatrix3D[4][4];
-		c.z = z * w.a_fMatricesMatrix3D[4][4];
-		return c; 
-	}*/
 
 	inline friend ostream& operator<< (ostream &os, const Vector4 &Vect4)
 	{

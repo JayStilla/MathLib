@@ -25,6 +25,8 @@ public:
 	float EulerAngle(Vector3 &a, Vector3 &b); 
 	Vector3 CrossProduct(Vector3 &a, Vector3 &c);
 	Vector3 m_TransformVector3(Matrix3 &w);
+	Vector3 Scale(Matrix3 &TempM);
+
 	Vector3 operator-(Vector3 &b)
 	{
 		Vector3 c; 
